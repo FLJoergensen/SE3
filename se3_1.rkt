@@ -10,7 +10,7 @@
 
 ;1.2
 (define (my-acos a)
-  (/ (sin (DegToRad a)) (cos (DegToRad a))))
+  (* 2 (atan (sqrt (/ (- 1 x) (+ 1 x))))))
 
 ;1.3
 (define (nmTokm v)
