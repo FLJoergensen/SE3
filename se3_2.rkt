@@ -2,6 +2,16 @@
 
 ;1
 ;;TODO
+(define miau 'Plueschi)
+(define katze miau)
+(define tiger 'miau)
+(define (welcherNameGiltWo PA PB)
+  (let ((PA 'Sam)
+        (PC PA))
+    PC))
+(define xs1 '(0 2 3 miau katze))
+(define xs2 (list miau katze))
+(define xs3 (cons katze miau))
 ;2.1
 (define (Fak v)
   (cond ((> v 0) (* v (Fak (- v 1))))

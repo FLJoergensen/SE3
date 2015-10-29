@@ -20,7 +20,7 @@
 ;(DistanzAB 37.75 "N" 122.45 "W" 21.32 "N" 157.83 "W")
 ;(distanzAB (NewOrt (DegToRad 37.75) "N" (DegToRad 122.45) "W") (NewOrt (DegToRad 21.32) "N" (DegToRad 157.83) "W"))
 (define (DistanzAB ALaenge ANS ABreite AEW BLaenge BNS BBreite BEW)
-  (distanzAB (NewOrt (DegToRad ALaenge) ANS (DegToRad ABreite) AEW) (NewOrt (DegToRad BLaenge) BNS (DegToRad BBreite) BEW))
+  (distanzAB (NewOrt (DegToRad ALaenge) ANS (DegToRad ABreite) AEW) (NewOrt (DegToRad BLaenge) BNS (DegToRad BBreite) BEW)))
 (define (distanzAB A B)
   (nmTokm (* 60
              (RadToDeg (acos (cosdg A B))))))
