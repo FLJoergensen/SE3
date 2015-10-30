@@ -1,7 +1,6 @@
 #lang racket
 
 ;1
-;;TODO
 (define miau 'Plueschi)
 (define katze miau)
 (define tiger 'miau)
@@ -12,6 +11,35 @@
 (define xs1 '(0 2 3 miau katze))
 (define xs2 (list miau katze))
 (define xs3 (cons katze miau))
+
+(display "1. miau gibt aus: ") miau
+(display ",da miau auf 'Plueschi referenziert \n \n")
+(display "2. katze gibt aus: ") katze
+(display ",da katze auf miau referenziert, was wiederum das Symbol 'Plueschi referenziert \n \n")
+(display "3. tiger gibt aus: ") tiger
+(display " , datiger auf das Symbol 'miau rferenziert \n \n")
+(display "4. (quote katze) gibt aus: ") (quote katze)
+(display ",da quote aus der Eingabe ein Symbol macht \n \n")
+(display "5. (eval tiger) gibt aus: 'Plueschi \n")
+(display ",da 'miau evaluiert und damit ausgeführt wird und auf 'Plueschi referenziert \n \n")
+(display "6. (eval katze) gibt aus: ist undefiniert \n")
+(display ",da kein Symbol verwertet wird, das ausgeführt werden könnte \n \n")
+(display "7. (eval 'tiger) gibt aus: 'miau \n")
+(display ",da diesmal direkt 'tiger evaluiert wird, was auf 'miau referenziert \n \n")
+(display "8. (welcherNameGiltWo 'harry 'potter) gibt aus: ") (welcherNameGiltWo 'harry 'potter)
+(display ", da PersonC auf das übergebene 'harry referenziert und PersonC von der Funktion übergeben wird \n \n")
+(display "9. (cdddr xs1) gibt aus: ") (cdddr xs1)
+(display ",da aus der Liste xs1 das Elemt nach dem dritten der Liste xs1 ausgegeben wird, was die Liste '(miau katze) ist \n \n")
+(display "10. (cdr xs2) gibt aus: ") (cdr xs2)
+(display ",da cdr xs2 uns als zweites Element die Funktion katze in einer Liste ausgibt, was auf miau referenziert, was auf das Symbol 'Plueschi referenziert \n \n")
+(display "11. (cdr xs3) gibt aus: ") (cdr xs3)
+(display ",diesmal greifen wir auf ein Pair zu, was uns nur das Element miau ausgibt, was auf 'Plueschi referenziert \n \n")
+(display "12. (eval (sqrt 3)) gibt aus: 1.7320508075688772")
+(display ",da das Element (sqrt 3) evaluiert wird, was als Element direkt ausgegeben werden kann \n \n")
+(display "13. (eval '(welcherNameGiltWo 'tiger 'katze)) gibt aus: 'tiger \n")
+(display ", da welcherNameGiltWo 'tiger ausgibt und beim evaluieren von ''tiger Das Symbol ausgegeben wird, was 'tiger ist  \n \n")
+(display "14. (eval (welcherNameGiltWo 'katze 'tiger))gibt aus: 'Plueschi \n")
+(display ",da welcherNameGiltWo 'katze ausgibt und beim avaluieren von 'katze auf miau referenziert wird, was auf das Symbol'Plueschi referenziert")
 ;2.1
 (define (Fak v)
   (cond ((> v 0) (* v (Fak (- v 1))))
@@ -24,16 +52,11 @@
         ((= v 0) (Fak2 1 (- e 1)))
         (else (error "v element aus N"))))
 ;2.2
-;TODO
 (define (pow r n)
-  (cond ((> n 0) (* (pow r (- n 1)) r))
-        ((= n 0) 1)))
-(define (pow2 r n)
-  (cond ((odd? n) (* (pow2 r (- n 1)) r))
-        ((even? n) (sqr (pow2 r (/ n 2))))
-        ((= n 0) 1)))
+  (cond ((= n 0) 1)
+        ((odd? n) (* (pow r (- n 1)) r))
+        ((even? n) (sqr (pow r (/ n 2))))))
 ;2.3
-;TEST
 (define (2euler genau)
   (euler 1 genau))
 (define (euler v genau)
@@ -46,9 +69,14 @@
         (else (eulerEnd (+ c 1) genau (+ v (/ c (Fak (- c 1))))))))
 ;2.4
 ;;TODO
+(define (pi-selbst genau)
+  (pi1 3 genau))
+(define (pi1 v genau)
+  (cond ((= 0 (/ v 100)) (write v) (write "/n") (pi1 v genau))
+        ((< (+ v 4) genau) (+ (/ 1 (+ v 2)) (/ 1 (+ v 4))))
+        (else (- (+ (/ 1 (+ v 2)) (/ 1 (+ v 4))) (pi1 (+ v 4) genau)))))
 
 ;3
-;;TODO
 (define (type-of e)
   (cond ((boolean? e) "Boolean")
         ((list? e) "Liste")
