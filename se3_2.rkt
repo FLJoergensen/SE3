@@ -57,6 +57,7 @@
         ((odd? n) (* (pow r (- n 1)) r))
         ((even? n) (sqr (pow r (/ n 2))))))
 ;2.3
+;;Test
 (define (2euler genau)
   (euler 1 genau))
 (define (euler v genau)
@@ -68,13 +69,18 @@
   (cond ((< (/ c (Fak (- c 1))) genau) (+ v (/ c (Fak (- c 1)))))
         (else (eulerEnd (+ c 1) genau (+ v (/ c (Fak (- c 1))))))))
 ;2.4
-;;TODO
+;;Test
+;;;Nicht GLEICH!
 (define (pi-selbst genau)
-  (pi1 3 genau))
-(define (pi1 v genau)
-  (cond ((= 0 (/ v 100)) (write v) (write "/n") (pi1 v genau))
-        ((< (+ v 4) genau) (+ (/ 1 (+ v 2)) (/ 1 (+ v 4))))
-        (else (- (+ (/ 1 (+ v 2)) (/ 1 (+ v 4))) (pi1 (+ v 4) genau)))))
+  (- 1 (pi 3 genau)))
+(define (pi v genau)
+  (cond ((< (/ 1 (+ v 4)) genau) (+ (/ 1 v) (/ 1 (+ v 2))))
+        (else (- (+ (/ 1 v) (/ 1 (+ v 2))) (pi (+ v 6) genau)))))
+(define (pi-selbstEnd genau)
+  (piEnd 3 genau 1))
+(define (piEnd v genau data)
+  (cond ((< (/ 1 (+ v 4)) genau) (- data (+ (/ 1 v) (/ 1 (+ v 2)))))
+        (else (piEnd (+ v 6) genau (- data (+ (/ 1 v) (/ 1 (+ v 2))))))))
 
 ;3
 (define (type-of e)
