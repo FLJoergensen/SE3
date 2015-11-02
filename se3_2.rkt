@@ -72,10 +72,10 @@
 ;;Test
 ;;;Nicht GLEICH!
 (define (pi-selbst genau)
-  (- 1 (pi 3 genau)))
-(define (pi v genau)
+  (- 1 (pi- 3 genau)))
+(define (pi- v genau)
   (cond ((< (/ 1 (+ v 4)) genau) (+ (/ 1 v) (/ 1 (+ v 2))))
-        (else (- (+ (/ 1 v) (/ 1 (+ v 2))) (pi (+ v 6) genau)))))
+        (else (- (+ (/ 1 v) (/ 1 (+ v 2))) (pi- (+ v 6) genau)))))
 (define (pi-selbstEnd genau)
   (piEnd 3 genau 1))
 (define (piEnd v genau data)
