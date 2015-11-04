@@ -1,4 +1,5 @@
 #lang racket
+;;; Sabrina,Tom,Finn
 
 ;1
 (define miau 'Plueschi)
@@ -41,6 +42,7 @@
 (display "14. (eval (welcherNameGiltWo 'katze 'tiger))gibt aus: 'Plueschi \n")
 (display ",da welcherNameGiltWo 'katze ausgibt und beim avaluieren von 'katze auf miau referenziert wird, was auf das Symbol'Plueschi referenziert")
 ;2.1
+;;(Fak 100)
 (define (Fak v)
   (cond ((> v 0) (* v (Fak (- v 1))))
         ((= v 0) 1)
@@ -52,12 +54,16 @@
         ((= v 0) (Fak2 1 (- e 1)))
         (else (error "v element aus N"))))
 ;2.2
+;;(power 10 100)
+(define (power r n)
+  (pow r n))
 (define (pow r n)
   (cond ((= n 0) 1)
         ((odd? n) (* (pow r (- n 1)) r))
         ((even? n) (sqr (pow r (/ n 2))))))
 ;2.3
-;;Test
+;;(2euler (/ 1 (pow 10 1000)))
+;;(2eulerEnd (/ 1 (pow 10 1000)))
 (define (2euler genau)
   (euler 1 genau))
 (define (euler v genau)
