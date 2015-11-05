@@ -3,7 +3,17 @@
 ;1.1
 (define tabelle '(("A" "Alfa")
                   ("B" "Bravo")
-                  ("C" "Charlie")))
+                  ("C" "Charlie")
+                  (#\D "Delta")
+                  (#\E "Echo")
+                  (#\F "Foxtrott")
+                  (#\G "Golf")
+                  (#\H "Hotel")
+                  (#\I "India")
+                  (#\J "Juliett")))
+(define (createTabelle quellCharID Ergebnis)
+  (eval '(define tabelle l1)))
+(define 
 
 ;1.2
 (define (Text->p text tabelle)
