@@ -74,3 +74,7 @@
 (define (BeT textList dict res)
   (cond ((empty? textList) res)
         (else (BeT (cdr textList) dict (append res (transE (car textList) dict))))))
+
+;2
+(require se3-bib/flaggen-module)
+(require flaggen-module)
