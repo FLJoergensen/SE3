@@ -1,7 +1,8 @@
 #lang racket
 
 ;1.1
-;TODO
+;;;Es wurde eine Assoziatieve Liste benutzt um einfach die ersten Zeichen mit "assoc" auswerten zu können
+;;;da wir ja eh nur in eine richtung die buchstaben übersetzen wollen.
 (define tabelle '((#\A "Alfa")
                   (#\B "Bravo")
                   (#\C "Charlie")
@@ -42,6 +43,7 @@
                   (#\. "Stop")))
 
 ;1.2
+;;(translate #\A tabelle)
 (define (translate v dict)
   (let ((r (assoc v dict)))
     (cond ((not (equal? r #f)) (cdr r)))))
@@ -77,4 +79,54 @@
 
 ;2
 (require se3-bib/flaggen-module)
-(require flaggen-module)
+;(require flaggen-module)
+;2.1
+;;;Gleiche Begründung wie in 1.1
+(define tabelleFlaggen '((#\A A)
+                  (#\B B)
+                  (#\C C)
+                  (#\D D)
+                  (#\E E)
+                  (#\F F)
+                  (#\G G)
+                  (#\H H)
+                  (#\I I)
+                  (#\J J)
+                  (#\K K)
+                  (#\L L)
+                  (#\M M)
+                  (#\N N)
+                  (#\O O)
+                  (#\P P)
+                  (#\Q Q)
+                  (#\R R)
+                  (#\S S)
+                  (#\T T)
+                  (#\U U)
+                  (#\V V)
+                  (#\W W)
+                  (#\X X)
+                  (#\Y Y)
+                  (#\Z Z)
+                  (#\0 Z0)
+                  (#\1 Z1)
+                  (#\2 Z2)
+                  (#\3 Z3)
+                  (#\4 Z4)
+                  (#\5 Z5)
+                  (#\6 Z6)
+                  (#\7 Z7)
+                  (#\8 Z8)
+                  (#\9 Z9)))
+;2.2
+;;(translateFlaggen #\A)
+(define (translateFlaggen v)
+  (eval (car (translate v tabelleFlaggen))))
+;2.3
+;;(Text->Flaggen "BeispielTextOhneLehrzeichen")
+;;;Der Text darf keine Lehrzeichen enthalten
+(define (Text->Flaggen text)
+  (T->F (string->list text) '()))
+(define (T->F list r)
+  (cond ((empty? list) (reverse r))
+        (else (T->F (cdr list) (cons (translateFlaggen (car list)) r)))))
