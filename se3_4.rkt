@@ -82,3 +82,34 @@
   (let ((r (assoc v dict)))
     (cond ((not (equal? r #f)) (cdr r)))))
 
+;3.
+;Bei der inneren Reduktion werden die Terme von innen nach außen reduziert.
+;(define (hoch3 x (* x x x )))
+;(hoch3 (* 3 (+ 1 (hoch3 2))))
+;(hoch3 (* 3 (+ 1 (* 2 2 2))))
+;(hoch3 (* 3 (+ 1 8)))
+;(hoch3 (* 3 9))
+;(hoch3 27)
+;(* 27 27 27)
+;19.683
+;Bei der äußeren Reduktion werden die Terme von außen nach innen reduziert.
+;(define (hoch3 x (* x x x )))
+;(hoch3 (* 3 (+ 1 (hoch3 2))))
+;(* (* 3 (+ 1 (hoch3 2) (* 3 (+ 1 (hoch3 2) (* 3 (+ 1 (hoch3 2))))))))
+;(* 27 (* 3 (+ 1 (hoch3 2) (* 3 (+ 1 (hoch3 2))))))
+;(* 27 27 (* 3 (+ 1 (hoch3 2))))
+;(* 27 27 27 )
+;19.683
+; Als äußerer Ausdruck hätte eig. das erste * berechnet werden müssen, da die Ausdrücke, aber nochnicht eindeutig waren
+; waren, musste zuerst der innere Teil berechnet werden.
+
+; Wenn wir keine special form expression vorliegen haben, rechnet Racket mit der inneren Reduktion.
+; Im Falle einer special form expression rechnet Racket abhängig davon was die special form verlangt.
+;Die Innere Reduktion ist von Nachteil, wenn einige Parameter innerhalb der Funktion garnicht für die Berechnung benötigt werden.
+; Die Äußere Reduktion hingegen, ist ungünstig wenn ein Parameter mehrmals benutzt wird. Denn hier wird dieser dann mehrfach ausgewertet.
+
+; Aufgrund von new-if wird die else-Bedingung zwar nicht zurückgegeben sobald es abbrechen soll, aber er rechnet sie dennoch durch
+;da das Programm komplett durchläuft. Das führt dazu, dass wir unendlich lange das else in die nächste Tiefe durchlaufen.
+; Dadurch geht der Speicher aus. Das zeigt, das Special form expressions unerläßlich sind, damit ein Programm eine Abbruchbedingung hat
+; und das Programm nur die Teile durchrechnet, die es durchrechnen soll.
+
