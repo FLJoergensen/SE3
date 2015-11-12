@@ -81,4 +81,40 @@
 (define (translate v dict)
   (let ((r (assoc v dict)))
     (cond ((not (equal? r #f)) (cdr r)))))
-
+(define (string-repeat i str)
+  (s-r i str ""))
+(define (s-r i str resu)
+  (cond ((< i 1) resu)
+        (else (s-r (- i 1) str (string-append resu str)))))
+(define (stringlist->string xs)
+  (cond ((empty? xs) "")
+        (else string-append (car xs) " " (stringlist->string (cdr xs)))))
+(define (B-E-T str)
+  (stringlist->string (Buchstabieren-eines-Textes str)))
+(define (Buchstabieren-eines-Textes text)
+  (BeT (string->list (string-upcase text)) tabelle '()))
+(define (transE v dict)
+  (let ((r (translate v dict)))
+    (cond ((void? r) '())
+          (else  r))))
+(define (BeT textList dict res)
+  (cond ((empty? textList) res)
+        (else (BeT (cdr textList) dict (append res (transE (car textList) dict))))))
+(define (notfallmeldung schiffsname rufzeichen position notfallzeit notfallart weitere-angaben)
+  (string-append  (string-repeat 3 "MAYDAY ") "\n"
+                  "HIER IST " "\n"
+                  (string-repeat 3 (string-append schiffsname " ")) (B-E-T rufzeichen) "\n"
+                  "MAYDAY " schiffsname " ICH BUCHSTABIERE " (B-E-T schiffsname) "\n"
+                  "RUFZEICHEN " (B-E-T rufzeichen) "\n"
+                  "NOTFALLPOSITION " position "\n"
+                  "NOTFALLZEIT " notfallzeit "\n"
+                  notfallart "\n"
+                  weitere-angaben "\n"
+                  "ICH SENDE DEN TRÄGER ---" "\n"
+                  schiffsname " " (B-E-T rufzeichen) "\n"
+                  "OVER" "\n"))
+;2.2
+(display (notfallmeldung "BABETTE" "DEJY" "UNGEFAEHR 10 SM NORDOESTLICH LEUCHTTURM KIEL" "1000 UTC" "SCHWERER WASSEREINBRUCH WIR SINKEN"
+                         "KEINE VERLETZTEN\nVIEW MANN GEHEN IN DIE RETTUNGSINSEL\nSCHNELLE HILFE ERFORDERLICH"))
+(display (notfallmeldung "AMIRA" "AMRY" "53°56’N, 006°31’E" "1640 UTC" "KENTERUNG IN SCHWERER SEE, SCHIFF SINKT" 
+                         "15 MANN AN BORD, SCHIFF IST 15 METER LANG, ROTER RUMPF"))
