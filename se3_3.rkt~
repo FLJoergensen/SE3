@@ -54,7 +54,7 @@
   (char-upcase chr))
 
 ;1.4
-;;(Buchstabieren-eines-Textes "TEXTOHNELEHRZEICHEN")
+;;(Buchstabieren-einesTextes "TEXTOHNELEHRZEICHEN")
 (define (Buchstabieren-eines-Textes text)
   (BeT (string->list (string-upcase text)) tabelle '()))
 (define (transE v dict)
