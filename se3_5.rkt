@@ -2,6 +2,6 @@
 
 (require se3-bib/butterfly-module)
 
-(show_butterfly ’red ’stripes ’curved ’rhomb)
-(show_butterfly ’yellow ’stripes ’straight ’hexagon)
-(show_butterfly ’blue ’dots ’curly ’ellipse)
+(show-butterfly 'red 'stripes 'curved 'rhomb)
+(show-butterfly 'yellow 'stripes 'straight 'hexagon)
+(show-butterfly 'blue 'dots 'curly 'ellipse)
