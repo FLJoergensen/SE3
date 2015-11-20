@@ -9,10 +9,10 @@
 ;Wir speichern alle Merkmale, die ein Schmetterling haben kann jeweils in einer Liste.
 ;Die Dominanz ist durch die Reihenfolge der Elemente in der Liste geordnet.
 ;In der Liste wird mit der dominantesten Art eines Merkmals begonnen.
-(define musterung '(punkte streifen sterne))
-(define fluegelfarbe '(rot gruen blau gelb))
-(define fluegelform '(rhombisch hexagonal elliptisch))
-(define fuehlerform '(gerade gekruemmt geschweift))
+(define musterung '(dots stripes star))
+(define fluegelfarbe '(red green blue yellow))
+(define fluegelform '(rhomb hexagon ellipse))
+(define fuehlerform '(straight curved curly))
 
 #|
 Einem Schmetterling muss von jedem dieser Listen ein Element zugeordnet sein.
