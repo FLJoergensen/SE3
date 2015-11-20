@@ -36,3 +36,16 @@
         ((equal? x1 (car xs)) (cons x1 x2))
         ((equal? x2 (car xs)) (cons x2 x1))
         (else (gibdominant x1 x2 (cdr xs)))))
+(define (gib-Rnd xs)
+  (car (shuffle xs)))
+
+
+(define (genKinder xs1 xs2 i)
+  ())
+(define (genPar xs)
+  (list (cons (car xs) (gib-Rnd (gibrezesList (car xs) musterung)))
+        (cons (cadr xs) (gib-Rnd (gibrezesList (cadr xs) fluegelfarbe)))
+        (cons (caddr xs) (gib-Rnd (gibrezesList (caddr xs) fluegelform)))
+        (cons (cadddr xs) (gib-Rnd (gibrezesList (cadddr xs) fuehlerform)))))
+(define (genKind xs1 xs2)
+  ())
