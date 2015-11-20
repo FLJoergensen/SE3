@@ -60,7 +60,7 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 
 
 (define (genKinder xs1 xs2 i)
-  (cond ((> i 0) (show-S (genKind xs1 xs2)) (genKinder xs1 xs2 (- i 1)))
+  (cond ((> i 0) (display (show-S (genKind xs1 xs2))) (genKinder xs1 xs2 (- i 1)))
         (else 0)))
 (define (genSchmetterling)
   (list (gib-Rnd musterung)
@@ -80,6 +80,8 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 (define (gibGenom xpair ypair xs)
   (gibdominant (gib-Rnd (list (car xpair) (cdr xpair))) (gib-Rnd (list (car ypair) (cdr ypair))) xs))
 (define (show-S xs)
-  (show-butterfly (car (car xs)) (car (cadr xs)) (car (caddr xs)) (car (cadddr xs))))
+  (show-butterfly (car (cadr xs)) (car (car xs)) (car (cadddr xs)) (car (caddr xs))))
+(define (show-1S xs)
+  (print (car (list (car (cadr xs)) (car xs) (cadddr xs) (caddr xs)))))
 
 (genKinder (genPar (genSchmetterling)) (genPar (genSchmetterling)) 2)
