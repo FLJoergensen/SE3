@@ -59,11 +59,16 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 
 
 (define (genKinder xs1 xs2 i)
-  ())
+  (0))
+(define (genSchmetterling)
+  (list (gib-Rnd musterung)
+          (gib-Rnd fluegelfarbe)
+          (gib-Rnd fluegelform)
+          (gib-Rnd fuehlerform)))
 (define (genPar xs)
   (list (cons (car xs) (gib-Rnd (gibrezesList (car xs) musterung)))
         (cons (cadr xs) (gib-Rnd (gibrezesList (cadr xs) fluegelfarbe)))
         (cons (caddr xs) (gib-Rnd (gibrezesList (caddr xs) fluegelform)))
         (cons (cadddr xs) (gib-Rnd (gibrezesList (cadddr xs) fuehlerform)))))
 (define (genKind xs1 xs2)
-  ())
+  (0))
