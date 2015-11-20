@@ -1,6 +1,7 @@
 #lang racket
 
 (require se3-bib/butterfly-module)
+(require racket/Trace)
 
 ;(show-butterfly 'red 'stripes 'curved 'rhomb)
 ;(show-butterfly 'yellow 'stripes 'straight 'hexagon)
@@ -59,7 +60,8 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 
 
 (define (genKinder xs1 xs2 i)
-  (0))
+  (cond ((> i 0) (show-S (genKind xs1 xs2)) (genKinder xs1 xs2 (- i 1)))
+        (else 0)))
 (define (genSchmetterling)
   (list (gib-Rnd musterung)
           (gib-Rnd fluegelfarbe)
@@ -71,4 +73,13 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
         (cons (caddr xs) (gib-Rnd (gibrezesList (caddr xs) fluegelform)))
         (cons (cadddr xs) (gib-Rnd (gibrezesList (cadddr xs) fuehlerform)))))
 (define (genKind xs1 xs2)
-  (0))
+  (list (gibGenom (car xs1) (car xs2) musterung)
+        (gibGenom (cadr xs1) (cadr xs2) fluegelfarbe)
+        (gibGenom (caddr xs1) (caddr xs2) fluegelform)
+        (gibGenom (cadddr xs1) (cadddr xs2) fuehlerform)))
+(define (gibGenom xpair ypair xs)
+  (gibdominant (gib-Rnd (list (car xpair) (cdr xpair))) (gib-Rnd (list (car ypair) (cdr ypair))) xs))
+(define (show-S xs)
+  (show-butterfly (car (car xs)) (car (cadr xs)) (car (caddr xs)) (car (cadddr xs))))
+
+(genKinder (genPar (genSchmetterling)) (genPar (genSchmetterling)) 2)
