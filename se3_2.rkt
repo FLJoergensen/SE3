@@ -100,3 +100,32 @@
         ((vector? e) "Vector")
         ((procedure? e) "Funktion")
         (else "unbekanter Type")))
+        
+  ; (type-of (* 2 3 4)) --> 'Zahl
+; Produkt der Multiplikation
+
+; (type-of (not 42)) --> 'Boolean
+; da es sich um eine Negation von 42 handelt, ist es eine Negation
+
+;  (type-of '(eins zwei drei)) --> 'Pair
+; da der Parameter eins zwei drei als Paar angelegt wurde und das zweite Element keine Liste ist
+
+; (type-of '()) --> 'Liste
+; Eine leere liste ist vom Typ Liste
+
+(define (id z) z)
+
+; (type-of (id sin)) --> 'Funktion
+; id bildet das gegebene Argument auf sich selbst ab (sin auf sin), sin ist vom Typ Funktion
+
+; (type-of (string-ref "Harry_Potter_und_der_Stein_der_Weisen" 3)) --> 'Char
+; string-ref gibt den Char an einer Position zurück, in diesem Fall den an Position 3, also ein 'r'
+
+; (type-of (lambda (x) x)) --> 'Funktion
+; (lambda (x) x) referenziert auf eine anonyme Funktion, die ansonsten der id-Funktion entspricht, der Typ ist also Funktion (procedure)
+
+; (type-of type-of) --> 'Funktion
+; type-of ist eine Funktion, der typ ist entsprechend auch Funktion (procedure)
+
+; (type-of (type-of type-of)) --> 'Symbol
+; der Rückgabewert von type-of ist ein Symbol
