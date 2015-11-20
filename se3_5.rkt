@@ -14,18 +14,36 @@
 (define fluegelform '(rhombisch hexagonal elliptisch))
 (define fuehlerform '(gerade gekruemmt geschweift))
 
-;Einem Schmetterling muss von jedem dieser Listen ein Element zugeordnet sein.
-;Zusätzlich besitzt jeder Schmetterling ein zweites rezessives Element von jedem Merkmal,
-;welches nicht sichtbar ist, aber bei der Vererbung eine Rolle spielt.
-;Die dominanten Merkmale des Elternpaares sind fest vorgegeben. Die rezessiven
-;müssen mittels einer Zufall-Funktion zugeteilt werden.
-;Dann brauchen wir eine Funktion, die uns zufällig Kind-Schmetterlinge aus
-;den Merkmalen der Eltern erzeugt. Hierbei ist zu beachten, dass für jedes Merkmal
-;zufällig das dominante oder das rezessive Merkmal des jeweiligen Elternteils weitervererbt
-;werden kann. Das dominantere von Beiden bestimmt schlussendlich das Aussehen des
-;Kind-Schmetterlings.
-;Am Ende brauchen wir eine Funktion, die uns den Schmetterling ausgibt, sodass
-;klar ist, welches seine dominanten Merkmale sind.
+#|
+Einem Schmetterling muss von jedem dieser Listen ein Element zugeordnet sein.
+Zusätzlich besitzt jeder Schmetterling ein zweites rezessives Element von jedem Merkmal,
+welches nicht sichtbar ist, aber bei der Vererbung eine Rolle spielt.
+Die dominanten Merkmale des Elternpaares sind fest vorgegeben. Die rezessiven
+müssen mittels einer Zufall-Funktion zugeteilt werden.
+Dann brauchen wir eine Funktion, die uns zufällig Kind-Schmetterlinge aus
+den Merkmalen der Eltern erzeugt. Hierbei ist zu beachten, dass für jedes Merkmal
+zufällig das dominante oder das rezessive Merkmal des jeweiligen Elternteils weitervererbt
+werden kann. Das dominantere von Beiden bestimmt schlussendlich das Aussehen des
+Kind-Schmetterlings.
+Am Ende brauchen wir eine Funktion, die uns den Schmetterling ausgibt, sodass
+klar ist, welches seine dominanten Merkmale sind.
+
+Gliederung:
+- 4 Listen mit Merkmalen
+- Elternfunktion: Hier werden zwei Schmetterlinge (Listen) und eine
+gewünschte Kinderanzahl übergeben
+- Zufallfunktion: Generiert zufällig die rezessiven Merkmale bzw. entscheidet
+welche Merkmale was dem Kind vom jeweiligen Elternteil übergeben wird
+- Auswahlfunktion: von den zwei übergebenen Merkmalen der Eltern muss nun ausgewählt werden
+welches der Beiden das dominantere Merkmal ist. Dies wird dann dem Kind vererbt.
+
+Datenstruktur zur Repräsentation des Genoms eines Schmetterlings:
+Am Anfang übergeben wir eine Liste der Merkmale. In der Funktion arbeiten wir mit einer Liste an
+Pairs. Wir müssen die dominanten Merkmale kennen, daher reicht es eine Liste derer zu übergeben.
+Während der Elternfunktion müssen wir dem Kind jedoch zufällig ein rezessives oder dominantes Merkmal übergeben.
+Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jeweils dem Dominanten in einem Pair ab.
+|#
+
 
 (define (gibrezesList x xs)
   (cond ((empty? xs) '())
