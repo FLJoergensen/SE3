@@ -61,7 +61,7 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 
 (define (genKinder xs1 xs2 i)
   (cond ((> i 0) (display (show-S (genKind xs1 xs2))) (genKinder xs1 xs2 (- i 1)))
-        (else 0)))
+        (else (void))))
 (define (genSchmetterling)
   (list (gib-Rnd musterung)
           (gib-Rnd fluegelfarbe)
@@ -84,4 +84,37 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 (define (show-1S xs)
   (print (car (list (car (cadr xs)) (car xs) (cadddr xs) (caddr xs)))))
 
-(genKinder (genPar (genSchmetterling)) (genPar (genSchmetterling)) 2)
+
+(define M (genPar (genSchmetterling)))
+(define V (genPar (genSchmetterling)))
+
+(print "Mutter")(display (show-S M))(display M)"\n"
+(print "Vater")(display (show-S V))(display V)"\n"
+
+(genKinder M V 5)"\n"
+
+;2
+(define M1 '(blue stripes curved hexagon))
+(define V1 '(green star curly rhomb))
+(define Toni '(red star curved rhomb))
+(define Tini '(green dots straight rhomb))
+(define Tina '(yellow stripes curly ellipse))
+
+(define (genTest M V K)
+  (and (genMöglichE? (car M) (car V) (car K) fluegelfarbe)
+       (genMöglichE? (cadr M) (cadr V) (cadr K) musterung)
+       (genMöglichE? (caddr M) (caddr V) (caddr K) fuehlerform)
+       (genMöglichE? (cadddr M) (cadddr V) (cadddr K) fluegelform)))
+(define (genMöglichE? M V K xs)
+  (or (genMöglich? M K xs) (genMöglich? V K xs)))
+(define (genMöglich? E K xs)
+  (inList? K (gibrezesList E xs)))
+(define (inList? v xs)
+  (cond ((empty? xs) #f)
+        ((equal? v (car xs)) #t)
+        (else (inList? v (cdr xs)))))
+#\n
+#\n
+"Mutter Antonia|Vater Anton|Kind Toni"(genTest M1 V1 Toni)
+"Mutter Antonia|Vater Anton|Kind Tini"(genTest M1 V1 Tini)
+"Mutter Antonia|Vater Anton|Kind Tina"(genTest M1 V1 Tina)
