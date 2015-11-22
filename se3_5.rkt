@@ -45,7 +45,8 @@ Während der Elternfunktion müssen wir dem Kind jedoch zufällig ein rezessives
 Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jeweils dem Dominanten in einem Pair ab.
 |#
 
-
+;Da ein Schmetterling von jedem Merkmaltyp zwei zugewiesen bekommt, muss unter diese zwischen dem dominanteren
+;und rezessiven Merkmal unterschieden werden. Dafür sind diese beiden Funktionen.
 (define (gibrezesList x xs)
   (cond ((empty? xs) '())
         ((equal? x (car xs)) xs)
@@ -55,6 +56,8 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
         ((equal? x1 (car xs)) (cons x1 x2))
         ((equal? x2 (car xs)) (cons x2 x1))
         (else (gibdominant x1 x2 (cdr xs)))))
+
+;Der Zufallsgenerator für Listen. Es soll durch shuffle aus xs also immer ein zufälliges Element ausgegeben werden 
 (define (gib-Rnd xs)
   (car (shuffle xs)))
 
@@ -62,11 +65,15 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 (define (genKinder xs1 xs2 i)
   (cond ((> i 0) (display (show-S (genKind xs1 xs2))) (genKinder xs1 xs2 (- i 1)))
         (else (void))))
+
+;Schmetterlingsgene werden random aus den einzelnen Merkmalslisten generiert
 (define (genSchmetterling)
   (list (gib-Rnd musterung)
           (gib-Rnd fluegelfarbe)
           (gib-Rnd fluegelform)
           (gib-Rnd fuehlerform)))
+
+
 (define (genPar xs)
   (list (cons (car xs) (gib-Rnd (gibrezesList (car xs) musterung)))
         (cons (cadr xs) (gib-Rnd (gibrezesList (cadr xs) fluegelfarbe)))
@@ -77,14 +84,17 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
         (gibGenom (cadr xs1) (cadr xs2) fluegelfarbe)
         (gibGenom (caddr xs1) (caddr xs2) fluegelform)
         (gibGenom (cadddr xs1) (cadddr xs2) fuehlerform)))
+
+
 (define (gibGenom xpair ypair xs)
   (gibdominant (gib-Rnd (list (car xpair) (cdr xpair))) (gib-Rnd (list (car ypair) (cdr ypair))) xs))
+  
 (define (show-S xs)
   (show-butterfly (car (cadr xs)) (car (car xs)) (car (cadddr xs)) (car (caddr xs))))
 (define (show-1S xs)
   (print (car (list (car (cadr xs)) (car xs) (cadddr xs) (caddr xs)))))
 
-
+;Definiert einen Mutter und einen Vaterschmetterling
 (define M (genPar (genSchmetterling)))
 (define V (genPar (genSchmetterling)))
 
@@ -94,12 +104,15 @@ Daher erstellen wir ein zufälliges rezessives Merkmal und speichern es mit jewe
 (genKinder M V 5)"\n"
 
 ;2
+;Definition der gegebenen Schmetterlinge
 (define M1 '(blue stripes curved hexagon))
 (define V1 '(green star curly rhomb))
 (define Toni '(red star curved rhomb))
 (define Tini '(green dots straight rhomb))
 (define Tina '(yellow stripes curly ellipse))
 
+;Gentest, ob durch die gegebenen dominanten Merkmale der Eltern, auch wirklich diese Kindschmetterlinge
+;gezeugt werden konnten.
 (define (genTest M V K)
   (and (genMöglichE? (car M) (car V) (car K) fluegelfarbe)
        (genMöglichE? (cadr M) (cadr V) (cadr K) musterung)
